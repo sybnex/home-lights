@@ -173,7 +173,7 @@ if aqua2power in devices:
   else:                                           setSwitch(aqua2power, "-o1", "Heater2 on")
   if checkRange( 8, 13) or checkRange(15, 21):    setSwitch(aqua2power, "-o2 -o4", "Aqua2 lights on")
   else:                                           setSwitch(aqua2power, "-f2 -f4", "Aqua2 lights off")
-  if checkRange( 7,  9) or checkRange(21, 22):    setSwitch(aqua2power, "-o3", "Mini light on")
+  if checkRange( 7, 13) or checkRange(15, 22):    setSwitch(aqua2power, "-o3", "Mini light on")
   else:                                           setSwitch(aqua2power, "-f3", "Mini light off")
   #if   not checkDay() and checkRange(17, 21):     setSwitch(aqua2power, "-o4", "Dinner on")
   #elif checkDay() and rain:                       setSwitch(aqua2power, "-o4", "Dinner on (rainy)")
