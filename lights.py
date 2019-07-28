@@ -136,14 +136,14 @@ if lightpower in devices:
   # Smalllight
   if   weekday in weekdays and checkRange( 5, 6): setSwitch(lightpower, "-o2", "Morning light")
   elif weekday in weekdays and checkRange( 6, 8): setSwitch(lightpower, "-o2", "Childs light")
-  elif                         checkRange(21,23): setSwitch(lightpower, "-o2", "Book light")
+  elif                         checkRange(20,23): setSwitch(lightpower, "-o2", "Book light")
   else:                                           setSwitch(lightpower, "-f2")
 
   # Mainlight
   if   workDay() and checkRange( 7, 8):           setSwitch(lightpower, "-o1", "Gooood Morning")
-  elif not checkDay() and checkRange(17, 22):     setSwitch(lightpower, "-o1", "It is getting dark now")
+  elif not checkDay() and checkRange(17, 21):     setSwitch(lightpower, "-o1", "It is getting dark now")
   elif checkNight():                              setSwitch(lightpower, "-o1", "Bed time, except TV is still on")
-  elif checkDay() and hour <= 7:                  setSwitch(lightpower, "-f1", "Too early for light")
+  elif checkDay() and hour <= 9:                  setSwitch(lightpower, "-f1", "Too early for light")
   #elif weekEnd() and checkDay() and (checkClouds(72) or rain):
   #                                                setSwitch(lightpower, "-o1", "weekEnd and rainy")
   #elif workDay() and hour >= 15 and (checkClouds(72) or rain):
