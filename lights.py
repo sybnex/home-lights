@@ -134,14 +134,14 @@ def setSwitch(serial, options, spoud = None):
 
 if lightpower in devices:
   # Smalllight
-  if   weekday in weekdays and checkRange( 5, 6): setSwitch(lightpower, "-o2", "Morning light")
-  elif weekday in weekdays and checkRange( 6, 8): setSwitch(lightpower, "-o2", "Childs light")
-  elif                         checkRange(20,23): setSwitch(lightpower, "-o2", "Book light")
+  if   workDay() and checkRange( 5, 6):           setSwitch(lightpower, "-o2", "Morning light")
+  elif workDay() and checkRange( 6, 8):           setSwitch(lightpower, "-o2", "Childs light")
+  elif               checkRange(20,23):           setSwitch(lightpower, "-o2", "Book light")
   else:                                           setSwitch(lightpower, "-f2")
 
   # Mainlight
   if   workDay() and checkRange( 7, 8):           setSwitch(lightpower, "-o1", "Gooood Morning")
-  elif not checkDay() and checkRange(17, 21):     setSwitch(lightpower, "-o1", "It is getting dark now")
+  elif not checkDay() and checkRange(17, 22):     setSwitch(lightpower, "-o1", "It is getting dark now")
   elif checkNight():                              setSwitch(lightpower, "-o1", "Bed time, except TV is still on")
   elif checkDay() and hour <= 9:                  setSwitch(lightpower, "-f1", "Too early for light")
   #elif weekEnd() and checkDay() and (checkClouds(72) or rain):
@@ -150,7 +150,7 @@ if lightpower in devices:
   #                                                setSwitch(lightpower, "-o1", "workDay and rainy")
   else:                                           setSwitch(lightpower, "-f1", "Darkness is there")
   
-  # AqualightsAqualights
+  # Aqualights
   if   checkRange( 8, 13) or checkRange(15, 21):  setSwitch(lightpower, "-o4", "Aqua light on")
   else:                                           setSwitch(lightpower, "-f4", "Aqua light off")
   if   checkRange(12, 16):                        setSwitch(lightpower, "-o3", "Heat light on")
@@ -162,7 +162,7 @@ if aquapower in devices:
   else:                                           setSwitch(aquapower, "-f1", "More light off")
   if checkRange(23,  4):                          setSwitch(aquapower, "-f2", "Heater off")
   else:                                           setSwitch(aquapower, "-o2", "Heater on")
-  if checkRange( 7, 13) or checkRange(15, 22):    setSwitch(aquapower, "-o3", "Extra light on")
+  if checkRange( 7, 13) or checkRange(15, 21):    setSwitch(aquapower, "-o3", "Extra light on")
   else:                                           setSwitch(aquapower, "-f3", "Extra light off")
   #if checkRange(10, 18):                          setSwitch(aquapower, "-o4", "Mint on")
   #else:                                           setSwitch(aquapower, "-f4", "Mint off")
@@ -171,8 +171,8 @@ if aqua2power in devices:
   # Aqua2 stuff
   if checkRange(23,  4):                          setSwitch(aqua2power, "-f1", "Heater2 off")
   else:                                           setSwitch(aqua2power, "-o1", "Heater2 on")
-  if checkRange( 8, 13) or checkRange(15, 21):    setSwitch(aqua2power, "-o2 -o4", "Aqua2 lights on")
-  else:                                           setSwitch(aqua2power, "-f2 -f4", "Aqua2 lights off")
+  if checkRange( 8, 13) or checkRange(15, 21):    setSwitch(aqua2power, "-o2", "Aqua2 lights on")
+  else:                                           setSwitch(aqua2power, "-f2", "Aqua2 lights off")
   if checkRange( 7, 13) or checkRange(15, 22):    setSwitch(aqua2power, "-o3", "Mini light on")
   else:                                           setSwitch(aqua2power, "-f3", "Mini light off")
   #if   not checkDay() and checkRange(17, 21):     setSwitch(aqua2power, "-o4", "Dinner on")
