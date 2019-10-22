@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import datetime, os, subprocess, random, time
+import os
+os.system("sudo /home/pi/home-lights/install.sh")
+
+import datetime, subprocess, random, time, pickle
 
 url        = ""
 weekdays   = (1,2,3,4,5)
@@ -19,6 +22,7 @@ hour       = now.hour
 minute     = now.minute
 weekday    = now.isoweekday()
 log        = str(hour).zfill(2) + ":" + str(minute).zfill(2)
+filename   = "light.pickle"
 
 # get Serial numbers from connected devices
 proc = subprocess.Popen(["sispmctl", "-s"], stdout=subprocess.PIPE, shell=False)
@@ -79,6 +83,12 @@ else:
   temp_now  = None
   city      = None
 
+try:
+    with open(filename, ‘rb’) as f:
+        light = pickle.load(f)
+except:
+    light = False
+
 def checkOnline(hostname):
   response = os.system("ping -qc 3 " + hostname + " >/dev/null")
   if response == 0:                    return True
@@ -126,7 +136,6 @@ def setSwitch(serial, options, spoud = None):
     global finallog
     finallog += spoud + u", "
 
-
 # -------------------------------------------------
 # lightpower > 1: mainlight 2: worklight 3: charlielight 4: fishlight
 # aquapower  > 1: powerpump 2: heater    3: extralight   4: mintlight
@@ -148,6 +157,7 @@ if lightpower in devices:
   #                                                setSwitch(lightpower, "-o1", "weekEnd and rainy")
   #elif workDay() and hour >= 15 and (checkClouds(72) or rain):
   #                                                setSwitch(lightpower, "-o1", "workDay and rainy")
+  elif light:                                     setSwitch(lightpower, "-o1", "Simon said: light on!")
   else:                                           setSwitch(lightpower, "-f1", "Darkness is there")
   
   # Aqualights
