@@ -22,17 +22,17 @@ filename = "light.pickle"
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def lighton(update, context):
-    """Send a message when the command /help is issued."""
     light = True
     with open(filename, "wb") as f:
         pickle.dump(light, f)
+    update.message.reply_text('Set to on.')
 
 
 def lightoff(update, context):
-    """Send a message when the command /help is issued."""
     light = False
     with open(filename, "wb") as f:
         pickle.dump(light, f)
+    update.message.reply_text('Set to off.')
 
 
 def error(update, context):
