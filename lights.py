@@ -27,7 +27,7 @@ filename   = "light.pickle"
 # get Serial numbers from connected devices
 proc = subprocess.Popen(["sispmctl", "-s"], stdout=subprocess.PIPE, shell=False)
 (out, err) = proc.communicate()
-lines      = out.split("\n")
+lines      = out.decode("utf-8").split("\n")
 devices    = []
 for line in lines:
   if "serial" in line: devices.append(line.split(" ")[5])
