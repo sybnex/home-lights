@@ -32,10 +32,10 @@ devices    = []
 for line in lines:
   if "serial" in line: devices.append(line.split(" ")[5])
 if not devices:
-  print log + u": Found no devices!"
+  print(log + u": Found no devices!")
   exit(0)
 else:
-  print log + u": Found devices: " + str(devices)
+  print(log + u": Found devices: " + str(devices))
 
 # get weather data from internet
 url = "http://api.openweathermap.org/data/2.5/weather?id=7669801&units=metric&appid=62cf7951ca3d23ca481eb3fb33edd3bd"
@@ -51,7 +51,7 @@ try:
     code     = response.status_code
     weather  = response.json()    
   except: 
-    print log + u": Could not get any weather data! => %s" % code
+    print( log + u": Could not get any weather data! => %s" % code)
 except:
   print("could not load requests library!")
   os.system("find /usr -name '*.pyc' -delete")
