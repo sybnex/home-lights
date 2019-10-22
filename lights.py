@@ -185,11 +185,9 @@ if aqua2power in devices:
   else:                                           setSwitch(aqua2power, "-f2", "Aqua2 lights off")
   if checkRange( 7, 13) or checkRange(15, 22):    setSwitch(aqua2power, "-o3", "Mini light on")
   else:                                           setSwitch(aqua2power, "-f3", "Mini light off")
-  #if   not checkDay() and checkRange(17, 21):     setSwitch(aqua2power, "-o4", "Dinner on")
-  #elif checkDay() and rain:                       setSwitch(aqua2power, "-o4", "Dinner on (rainy)")
-  #elif checkDay() and checkClouds(72):            setSwitch(aqua2power, "-o4", "Dinner on (cloudy)")
-  #elif weekday in weekdays and hour == 7:         setSwitch(aqua2power, "-o4", "Breakfast on")
-  #else:                                           setSwitch(aqua2power, "-f4", "Table light off")
+  if not checkDay() and checkRange(17, 22):       setSwitch(aqua2power, "-o4", "Dinner on")
+  elif weekday in weekdays and hour == 7:         setSwitch(aqua2power, "-o4", "Breakfast on")
+  else:                                           setSwitch(aqua2power, "-f4", "Table light off")
 
 if len(weather) > 0:
   print(log + u": " + city + u" => Clouds at: " + str(cloud_prc).zfill(2) + u"%. Temp is: " + str(temp_now) + u"*C. Sunrise: " + str(sun) + u", Sunset: " + str(night) + u". Pressure: " + str(pressure).zfill(4) + u". Humidity: " + str(humidity).zfill(2) + u"%. Rain is " + str(rain))
