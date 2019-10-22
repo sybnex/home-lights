@@ -2,7 +2,7 @@
 
 if [ ! -f ~/.installed ]; then
   # install files
-  sudo apt install python3-pip git
+  sudo apt install python3-pip git -y
 
   # python stuff
   sudo pip3 install --upgrade pip
@@ -15,5 +15,5 @@ fi
 crontab crontab.file
 
 # ensure bot is running
-test -n "$(pgrep -f lights)" || sudo python3 /home/pi/home-lights/bot.py
+test -n "$(pgrep -f bot.py)" || sudo python3 /home/pi/home-lights/bot.py
 
