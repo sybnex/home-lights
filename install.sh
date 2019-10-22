@@ -2,6 +2,7 @@
 
 if [ ! -f ~/.installed ]; then
   # install files
+  sudo apt update
   sudo apt install python3-pip git -y
 
   # python stuff
