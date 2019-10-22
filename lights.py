@@ -84,7 +84,7 @@ else:
   city      = None
 
 try:
-    with open(filename, ‘rb’) as f:
+    with open(filename, "rb") as f:
         light = pickle.load(f)
 except:
     light = False
