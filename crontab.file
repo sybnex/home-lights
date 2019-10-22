@@ -1,4 +1,4 @@
 * * * * * cd ~/home-lights; git pull
 * * * * * sudo /usr/bin/python3 /home/pi/home-lights/lights.py >> /var/log/lights.log
-* * * * * test -n "$(pgrep -f bot.py)" || sudo python3 /home/pi/home-lights/bot.py &
+* * * * * test -n "$(pgrep -f bot.py)" || sudo /usr/bin/python3 /home/pi/home-lights/bot.py &
 1 3 * * 0 sudo /sbin/reboot
