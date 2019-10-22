@@ -22,7 +22,7 @@ hour       = now.hour
 minute     = now.minute
 weekday    = now.isoweekday()
 log        = str(hour).zfill(2) + ":" + str(minute).zfill(2)
-filename   = "light.pickle"
+filename   = "/home/pi/home-lights/light.pickle"
 
 # get Serial numbers from connected devices
 proc = subprocess.Popen(["sispmctl", "-s"], stdout=subprocess.PIPE, shell=False)
