@@ -45,7 +45,7 @@ def main():
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
 
-    with open("token.pickle", "rb") as f:
+    with open("/home/pi/home-lights/token.pickle", "rb") as f:
         token = pickle.load(f)
     updater = Updater(token, use_context=True)
 
