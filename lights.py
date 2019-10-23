@@ -152,12 +152,12 @@ if lightpower in devices:
   if   workDay() and checkRange( 7, 8):           setSwitch(lightpower, "-o1", "Gooood Morning")
   elif not checkDay() and checkRange(17, 22):     setSwitch(lightpower, "-o1", "It is getting dark now")
   elif checkNight():                              setSwitch(lightpower, "-o1", "Bed time, except TV is still on")
+  elif light:                                     setSwitch(lightpower, "-o1", "Simon said: light on!")
   elif checkDay() and hour <= 9:                  setSwitch(lightpower, "-f1", "Too early for light")
   #elif weekEnd() and checkDay() and (checkClouds(72) or rain):
   #                                                setSwitch(lightpower, "-o1", "weekEnd and rainy")
   #elif workDay() and hour >= 15 and (checkClouds(72) or rain):
   #                                                setSwitch(lightpower, "-o1", "workDay and rainy")
-  elif light:                                     setSwitch(lightpower, "-o1", "Simon said: light on!")
   else:                                           setSwitch(lightpower, "-f1", "Darkness is there")
   
   # Aqualights
