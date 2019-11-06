@@ -42,6 +42,8 @@ url = "http://api.openweathermap.org/data/2.5/weather?id=7669801&units=metric&ap
 #url = "http://api.openweathermap.org/data/2.5/weather?q=Bern,ch&units=metric&appid=62cf7951ca3d23ca481eb3fb33edd3bd"
 
 weather  = {}
+light  = False
+dinner = False
 try:
   import requests
   timeDelay = random.randrange(0, 9)
@@ -52,6 +54,20 @@ try:
     weather  = response.json()    
   except: 
     print( log + u": Could not get any weather data! => %s" % code)
+  try:
+    r = requests.get("https://notes.julina.ch/light")
+    mainlight = r.json()["data"]
+  except: 
+    print( log + u": Could not get light data!")
+  else:
+    if mainlight   == "true":  light  = True
+  try:
+    r = requests.get("https://notes.julina.ch/dinner")
+    dinnerlight = r.json()["data"]
+  except: 
+    print( log + u": Could not get dinner data!")
+  else:
+    if dinnerlight == "true":  dinner = True
 except:
   print("could not load requests library!")
   os.system("find /usr -name '*.pyc' -delete")
@@ -82,12 +98,6 @@ else:
   pressure  = None
   temp_now  = None
   city      = None
-
-try:
-    with open(filename, "rb") as f:
-        light = pickle.load(f)
-except:
-    light = False
 
 def checkOnline(hostname):
   response = os.system("ping -qc 3 " + hostname + " >/dev/null")
@@ -187,6 +197,7 @@ if aqua2power in devices:
   else:                                           setSwitch(aqua2power, "-f3", "Mini light off")
   if not checkDay() and checkRange(17, 22):       setSwitch(aqua2power, "-o4", "Dinner on")
   elif weekday in weekdays and hour == 7:         setSwitch(aqua2power, "-o4", "Breakfast on")
+  elif dinner:                                    setSwitch(aqua2power, "-o4", "Breakfast on")
   else:                                           setSwitch(aqua2power, "-f4", "Table light off")
 
 if len(weather) > 0:
