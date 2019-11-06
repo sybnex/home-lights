@@ -58,14 +58,14 @@ try:
     r = requests.get("https://notes.julina.ch/light")
     mainlight = r.json()["data"]
   except: 
-    print( log + u": Could not get light data!")
+    print( log + u": Could not get light data! %s", r.json())
   else:
     if mainlight   == "true":  light  = True
   try:
     r = requests.get("https://notes.julina.ch/dinner")
     dinnerlight = r.json()["data"]
   except: 
-    print( log + u": Could not get dinner data!")
+    print( log + u": Could not get dinner data! %s", r.json())
   else:
     if dinnerlight == "true":  dinner = True
 except:
