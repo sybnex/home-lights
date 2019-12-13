@@ -43,6 +43,7 @@ url = "http://api.openweathermap.org/data/2.5/weather?id=7669801&units=metric&ap
 weather  = {}
 light  = False
 dinner = False
+vacation = False
 try:
   import requests
   timeDelay = random.randrange(0, 9)
@@ -67,6 +68,13 @@ try:
     print( log + u": Could not get dinner data! %s", r.json())
   else:
     if dinnerlight == "true":  dinner = True
+  try:
+    r = requests.get("https://notes.julina.ch/vacation")
+    vacationlight = r.json()["data"]
+  except: 
+    print( log + u": Could not get vacation data! %s", r.json())
+  else:
+    if vacationlight == "true":  vacation = True
 except:
   print("could not load requests library!")
   os.system("find /usr -name '*.pyc' -delete")
@@ -170,18 +178,18 @@ if lightpower in devices:
   else:                                           setSwitch(lightpower, "-f1", "Darkness is there")
   
   # Aqualights
-  if   checkRange( 8, 13) or checkRange(15, 21):  setSwitch(lightpower, "-o4", "Aqua light on")
+  if   checkRange( 8, 13) or checkRange(15, 20):  setSwitch(lightpower, "-o4", "Aqua light on")
   else:                                           setSwitch(lightpower, "-f4", "Aqua light off")
   if   checkRange(12, 16):                        setSwitch(lightpower, "-o3", "Heat light on")
   else:                                           setSwitch(lightpower, "-f3", "Heat light off")
 
 if aquapower in devices:
   # Aqua1 stuff
-  if checkRange( 8, 12) or checkRange(16, 19):    setSwitch(aquapower, "-o1", "More light on")
+  if checkRange( 8, 12) or checkRange(16, 18):    setSwitch(aquapower, "-o1", "More light on")
   else:                                           setSwitch(aquapower, "-f1", "More light off")
   if checkRange(23,  4):                          setSwitch(aquapower, "-f2", "Heater off")
   else:                                           setSwitch(aquapower, "-o2", "Heater on")
-  if checkRange( 7, 13) or checkRange(15, 21):    setSwitch(aquapower, "-o3", "Extra light on")
+  if checkRange( 7, 10) or checkRange(20, 22):    setSwitch(aquapower, "-o3", "Extra light on")
   else:                                           setSwitch(aquapower, "-f3", "Extra light off")
   #if checkRange(10, 18):                          setSwitch(aquapower, "-o4", "Mint on")
   #else:                                           setSwitch(aquapower, "-f4", "Mint off")
@@ -190,11 +198,11 @@ if aqua2power in devices:
   # Aqua2 stuff
   if checkRange(23,  4):                          setSwitch(aqua2power, "-f1", "Heater2 off")
   else:                                           setSwitch(aqua2power, "-o1", "Heater2 on")
-  if checkRange( 8, 13) or checkRange(15, 21):    setSwitch(aqua2power, "-o2", "Aqua2 lights on")
+  if checkRange( 8, 12) or checkRange(16, 20):    setSwitch(aqua2power, "-o2", "Aqua2 lights on")
   else:                                           setSwitch(aqua2power, "-f2", "Aqua2 lights off")
-  if checkRange( 7, 13) or checkRange(15, 22):    setSwitch(aqua2power, "-o3", "Mini light on")
+  if checkRange( 7, 10) or checkRange(20, 22):    setSwitch(aqua2power, "-o3", "Mini light on")
   else:                                           setSwitch(aqua2power, "-f3", "Mini light off")
-  if not checkDay() and checkRange(17, 22):       setSwitch(aqua2power, "-o4", "Dinner on")
+  if not checkDay() and checkRange(17, 21):       setSwitch(aqua2power, "-o4", "Dinner on")
   elif weekday in weekdays and hour == 7:         setSwitch(aqua2power, "-o4", "Breakfast on")
   elif dinner:                                    setSwitch(aqua2power, "-o4", "Breakfast on")
   else:                                           setSwitch(aqua2power, "-f4", "Table light off")
