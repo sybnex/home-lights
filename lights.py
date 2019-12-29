@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-os.system("sudo /home/pi/home-lights/install.sh")
-
 import datetime, subprocess, random, time
 
 url        = ""
@@ -23,6 +20,19 @@ minute     = now.minute
 weekday    = now.isoweekday()
 log        = str(hour).zfill(2) + ":" + str(minute).zfill(2)
 
+def getData(obj):
+  url = "https://notes.julina.ch/%s" % obj
+  try:
+    import requests
+    try:  
+      response = requests.get(url, timeout=5)
+      return response.json()
+    except: 
+      print(log + u": Could not get any weather data!")
+  except:
+    print("Could not load requests library!")
+    os.system("find /usr -name '*.pyc' -delete")
+
 # get Serial numbers from connected devices
 proc = subprocess.Popen(["sispmctl", "-s"], stdout=subprocess.PIPE, shell=False)
 (out, err) = proc.communicate()
@@ -33,51 +43,11 @@ for line in lines:
 if not devices:
   print(log + u": Found no devices!")
   exit(0)
-else:
-  print(log + u": Found devices: " + str(devices))
 
-# get weather data from internet
-url = "http://api.openweathermap.org/data/2.5/weather?id=7669801&units=metric&appid=62cf7951ca3d23ca481eb3fb33edd3bd"
-#url = "http://api.openweathermap.org/data/2.5/weather?q=Bern,ch&units=metric&appid=62cf7951ca3d23ca481eb3fb33edd3bd"
-
-weather  = {}
-light  = False
-dinner = False
-vacation = False
-try:
-  import requests
-  timeDelay = random.randrange(0, 9)
-  time.sleep(timeDelay)
-  try:  
-    response = requests.get(url, timeout=15)
-    code     = response.status_code
-    weather  = response.json()    
-  except: 
-    print( log + u": Could not get any weather data! => %s" % code)
-  try:
-    r = requests.get("https://notes.julina.ch/light")
-    mainlight = r.json()["data"]
-  except: 
-    print( log + u": Could not get light data! %s", r.json())
-  else:
-    if mainlight   == "true":  light  = True
-  try:
-    r = requests.get("https://notes.julina.ch/dinner")
-    dinnerlight = r.json()["data"]
-  except: 
-    print( log + u": Could not get dinner data! %s", r.json())
-  else:
-    if dinnerlight == "true":  dinner = True
-  try:
-    r = requests.get("https://notes.julina.ch/vacation")
-    vacationlight = r.json()["data"]
-  except: 
-    print( log + u": Could not get vacation data! %s", r.json())
-  else:
-    if vacationlight == "true":  vacation = True
-except:
-  print("could not load requests library!")
-  os.system("find /usr -name '*.pyc' -delete")
+weather = getData("weather")["value"]
+light = getData("light")["value"]
+dinner = getData("dinner")["value"]
+vacation = getData("dinner")["value"]
 
 if len(weather) > 0:
   city      = weather["name"]
@@ -89,8 +59,7 @@ if len(weather) > 0:
   temp_max  = weather["main"]["temp_max"]
   sunset    = weather["sys"]["sunset"]
   sunrise   = weather["sys"]["sunrise"]
-  dataSet   = weather["weather"]
-  for stte in dataSet:
+  for stte in weather["weather"]:
     if   stte["main"] == "Rain":         rain    = True
     elif stte["main"] == "Thunderstorm": thunder = True
     elif stte["main"] == "Snow":         snow    = True
@@ -162,12 +131,12 @@ if lightpower in devices:
   # Smalllight
   if   workDay() and checkRange( 5, 8):           setSwitch(lightpower, "-o2", "Morning light")
   elif               checkRange(21,23):           setSwitch(lightpower, "-o2", "Book light")
+  elif checkNight():                              setSwitch(lightpower, "-o2", "TV is still on")
   else:                                           setSwitch(lightpower, "-f2")
 
   # Mainlight
   if   workDay() and checkRange( 7, 8):           setSwitch(lightpower, "-o1", "Gooood Morning")
   elif not checkDay() and checkRange(17, 22):     setSwitch(lightpower, "-o1", "It is getting dark now")
-  elif checkNight():                              setSwitch(lightpower, "-o1", "Bed time, except TV is still on")
   elif light:                                     setSwitch(lightpower, "-o1", "Simon said: light on!")
   elif checkDay() and hour <= 9:                  setSwitch(lightpower, "-f1", "Too early for light")
   #elif weekEnd() and checkDay() and (checkClouds(72) or rain):
