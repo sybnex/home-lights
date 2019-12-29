@@ -44,7 +44,7 @@ if not devices:
   print(log + u": Found no devices!")
   exit(0)
 
-weather = getData("weather")["value"]
+weather = getData("weather")
 light = getData("light")["value"]
 dinner = getData("dinner")["value"]
 vacation = getData("dinner")["value"]
