@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import datetime, subprocess, random, time
+import datetime, subprocess, random, time, os
 
 url        = ""
 weekdays   = (1,2,3,4,5)
