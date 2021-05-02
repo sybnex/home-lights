@@ -45,9 +45,6 @@ if not devices:
   exit(0)
 
 weather = getData("weather")
-light = getData("light")["value"]
-dinner = getData("dinner")["value"]
-vacation = getData("dinner")["value"]
 
 if len(weather) > 0:
   city      = weather["name"]
@@ -153,14 +150,14 @@ if lightpower in devices:
 
 if aquapower in devices:
   # Aqua1 stuff
-  if checkRange( 9, 12) or checkRange(16, 18):    setSwitch(aquapower, "-o1", "Plant light on")
-  else:                                           setSwitch(aquapower, "-f1", "Plant light off")
+  if checkRange( 8, 12) or checkRange(16, 20):    setSwitch(aquapower, "-o1", "Aqua light on")
+  else:                                           setSwitch(aquapower, "-f1", "Aqua light off")
   if checkRange(23,  4):                          setSwitch(aquapower, "-f2", "Heater off")
   else:                                           setSwitch(aquapower, "-o2", "Heater on")
-  if checkRange( 7, 10) or checkRange(19, 21):    setSwitch(aquapower, "-o3", "Extra light on")
-  else:                                           setSwitch(aquapower, "-f3", "Extra light off")
-  #if checkRange(10, 18):                          setSwitch(aquapower, "-o4", "Mint on")
-  #else:                                           setSwitch(aquapower, "-f4", "Mint off")
+  if checkRange(12, 16):                          setSwitch(aquapower, "-o3", "Heat light on")
+  else:                                           setSwitch(aquapower, "-f3", "Heat light off")
+  # if checkRange(10, 18):                          setSwitch(aquapower, "-o4", "Mint on")
+  # else:                                           setSwitch(aquapower, "-f4", "Mint off")
 
 if aqua2power in devices:
   # Aqua2 stuff
@@ -168,9 +165,9 @@ if aqua2power in devices:
   else:                                           setSwitch(aqua2power, "-o1", "Heater2 on")
   if checkRange( 8, 12) or checkRange(16, 20):    setSwitch(aqua2power, "-o2", "Aqua2 lights on")
   else:                                           setSwitch(aqua2power, "-f2", "Aqua2 lights off")
-  if checkRange( 7, 10) or checkRange(19, 21):    setSwitch(aqua2power, "-o3", "Mini light on")
-  else:                                           setSwitch(aqua2power, "-f3", "Mini light off")
-  if checkRange( 8, 20):                          setSwitch(aqua2power, "-o4", "CO2 on")
+  # if checkRange( 7, 10) or checkRange(19, 21):    setSwitch(aqua2power, "-o3", "Mini light on")
+  # else:                                           setSwitch(aqua2power, "-f3", "Mini light off")
+  if checkRange( 8, 19):                          setSwitch(aqua2power, "-o4", "CO2 on")
   else:                                           setSwitch(aqua2power, "-f4", "CO2 off")
 
 if len(weather) > 0:
