@@ -35,7 +35,7 @@ if sunrise:
     now = datetime.datetime.now()
     sun = datetime.datetime.fromtimestamp(sunrise) - datetime.timedelta(hours = 0.5)
     if now < sun:
-        print(f"WARN: too dark, we can't see nothing!")
+        print(f"WARN: too dark, we can't see anything! {now} < {sun}")
         sys.exit(1)
 
 camera = PiCamera()
