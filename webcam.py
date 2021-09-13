@@ -13,8 +13,8 @@ from picamera import PiCamera
 # config
 stamp = datetime.datetime.now().strftime("%y%m%d-%H%M%S")
 notes_url = "https://notes.julina.ch"
-org_image = "nas/latest.jpg"
-new_image = f"nas/{stamp}.jpg"
+org_image = "/home/pi/nas/latest.jpg"
+new_image = f"/home/pi/nas/{stamp}.jpg"
 
 # check
 if not os.path.exists(org_image):
