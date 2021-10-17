@@ -156,8 +156,8 @@ if aquapower in devices:
   else:                                           setSwitch(aquapower, "-o2", "Heater on")
   if checkRange(12, 16):                          setSwitch(aquapower, "-o3", "Heat light on")
   else:                                           setSwitch(aquapower, "-f3", "Heat light off")
-  # if checkRange(10, 18):                          setSwitch(aquapower, "-o4", "Mint on")
-  # else:                                           setSwitch(aquapower, "-f4", "Mint off")
+  if not checkDay() and hour > 5                  setSwitch(aquapower, "-o4", "Mint on")
+  else:                                           setSwitch(aquapower, "-f4", "Mint off")
 
 if aqua2power in devices:
   # Aqua2 stuff
