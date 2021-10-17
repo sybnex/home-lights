@@ -114,7 +114,7 @@ def checkRange(min, max):
     else:                              return False
 
 def setSwitch(serial, options, spoud = None):
-  os.system("/usr/bin/sispmctl -D" + serial + " " + options + " >/dev/null")
+  os.system("sispmctl -D" + serial + " " + options + " >/dev/null")
   if spoud:
     global finallog
     finallog += spoud + u", "
