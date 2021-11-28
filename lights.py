@@ -165,8 +165,8 @@ if aqua2power in devices:
   else:                                           setSwitch(aqua2power, "-o1", "Heater2 on")
   if checkRange( 9, 12) or checkRange(17, 21):    setSwitch(aqua2power, "-o2", "Aqua2 lights on")
   else:                                           setSwitch(aqua2power, "-f2", "Aqua2 lights off")
-  # if checkRange( 7, 10) or checkRange(19, 21):    setSwitch(aqua2power, "-o3", "Mini light on")
-  # else:                                           setSwitch(aqua2power, "-f3", "Mini light off")
+  if checkRange( 9, 12) or checkRange(17, 21):    setSwitch(aqua2power, "-o3", "Mini light on")
+  else:                                           setSwitch(aqua2power, "-f3", "Mini light off")
   if checkRange( 8, 19):                          setSwitch(aqua2power, "-o4", "CO2 on")
   else:                                           setSwitch(aqua2power, "-f4", "CO2 off")
 
