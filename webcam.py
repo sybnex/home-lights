@@ -71,7 +71,7 @@ if __name__ == "__main__":
     if not check_path():
         sys.exit(1)
 
-    if sunshine:
+    if sunshine():
         make_picture()
         if weekday in weekdays:
             subprocess.run(f"sudo cp {org_image} {new_image}", shell=True)
