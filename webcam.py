@@ -24,6 +24,8 @@ new_image = f"/home/pi/nas/{stamp}.jpg"
 now = datetime.datetime.now()
 weekday = now.isoweekday()
 weekdays = (1,2,3,4,5)
+script_path = os.path.dirname(os.path.abspath(__file__))
+template_path = os.path.join(script_path, "./template.jinja2")
 
 # check
 if not os.path.exists(org_image):
@@ -61,7 +63,7 @@ if weekday in weekdays:
     subprocess.run(f"sudo cp {org_image} {new_image}", shell=True)
 
 if jinja:
-    jinja2_template_string = open("template.jinja2", 'rb').read()
+    jinja2_template_string = open(template_path, 'rb').read()
     template = Template(jinja2_template_string)
     html_template_string = template.render(title="",
                                            timestamp=stamp)
