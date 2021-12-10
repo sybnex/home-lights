@@ -24,8 +24,8 @@ new_image = f"/home/pi/nas/{stamp}.jpg"
 now = datetime.datetime.now()
 weekday = now.isoweekday()
 weekdays = (1,2,3,4,5)
-script_path = os.path.dirname(os.path.abspath(__file__))
-template_path = os.path.join(script_path, "./template.jinja2")
+script_path = os.path.abspath(".")
+template_path = f"{script_path}/template.jinja2"
 
 # check
 if not os.path.exists(org_image):
