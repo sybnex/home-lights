@@ -63,7 +63,7 @@ if weekday in weekdays:
     subprocess.run(f"sudo cp {org_image} {new_image}", shell=True)
 
 if jinja:
-    jinja2_template_string = open(template_path, 'rb').read()
+    jinja2_template_string = open(template_path, 'r').read()
     template = Template(jinja2_template_string)
     html_template_string = template.render(title="",
                                            timestamp=stamp)
