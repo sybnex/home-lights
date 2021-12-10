@@ -9,6 +9,7 @@ try:
     jinja = True
 except:
     jinja = False
+    print("could not import jinja2")
     pass
 import base64
 import requests
