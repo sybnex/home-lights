@@ -46,8 +46,10 @@ if sunrise and sunset:
     sun_am = datetime.datetime.fromtimestamp(sunrise) - datetime.timedelta(hours = 0.5)
     sun_pm = datetime.datetime.fromtimestamp(sunset) + datetime.timedelta(hours = 0.5)
     if now < sun_am:
+        print("too early: {sun_am}")
         sys.exit(1)
     if now > sun_pm:
+        print("too late: {sun_pm}")
         sys.exit(1)
 
 camera = PiCamera()
