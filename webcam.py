@@ -42,7 +42,7 @@ def getData(ident):
     return None, None
 
 sunset, sunrise = getData("weather")
-if sunrise && sunset:
+if sunrise and sunset:
     sun_am = datetime.datetime.fromtimestamp(sunrise) - datetime.timedelta(hours = 0.5)
     sun_pm = datetime.datetime.fromtimestamp(sunset) + datetime.timedelta(hours = 0.5)
     if now < sun_am:
