@@ -28,7 +28,7 @@ weekdays = (1,2,3,4,5)
 script_path = os.path.abspath(".")
 template_path = f"{script_path}/template.jinja2"
 
-def check_path:
+def check_path():
     if not os.path.exists(org_image):
         return False
     return True
