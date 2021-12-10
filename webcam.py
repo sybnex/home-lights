@@ -42,10 +42,12 @@ def getData(ident):
     return None, None
 
 sunset, sunrise = getData("weather")
-if sunrise:
-    now = datetime.datetime.now()
-    sun = datetime.datetime.fromtimestamp(sunrise) - datetime.timedelta(hours = 0.5)
-    if now < sun:
+if sunrise && sunset:
+    sun_am = datetime.datetime.fromtimestamp(sunrise) - datetime.timedelta(hours = 0.5)
+    sun_pm = datetime.datetime.fromtimestamp(sunset) + datetime.timedelta(hours = 0.5)
+    if now < sun_am:
+        sys.exit(1)
+    if now > sun_pm:
         sys.exit(1)
 
 camera = PiCamera()
@@ -65,7 +67,6 @@ if weekday in weekdays:
 if jinja:
     jinja2_template_string = open(template_path, 'r').read()
     template = Template(jinja2_template_string)
-    html_template_string = template.render(title="",
-                                           timestamp=stamp)
+    html_template_string = template.render(timestamp=stamp)
     with open("/home/pi/nas/index.html", "w") as result_file:
         result_file.write(html_template_string)
