@@ -4,6 +4,12 @@
 import os
 import sys
 import time
+try:
+    from jinja2 import Template
+    jinja = True
+except:
+    jinja = False
+    pass
 import base64
 import requests
 import datetime
@@ -15,6 +21,9 @@ stamp = datetime.datetime.now().strftime("%y%m%d-%H%M%S")
 notes_url = "https://notes.julina.ch"
 org_image = "/home/pi/nas/latest.jpg"
 new_image = f"/home/pi/nas/{stamp}.jpg"
+now = datetime.datetime.now()
+weekday = now.isoweekday()
+weekdays = (1,2,3,4,5)
 
 # check
 if not os.path.exists(org_image):
@@ -35,7 +44,6 @@ if sunrise:
     now = datetime.datetime.now()
     sun = datetime.datetime.fromtimestamp(sunrise) - datetime.timedelta(hours = 0.5)
     if now < sun:
-        print(f"WARN: too dark, we can't see anything! {now} < {sun}")
         sys.exit(1)
 
 camera = PiCamera()
@@ -49,4 +57,13 @@ time.sleep(15)
 camera.capture(org_image)
 camera.stop_preview()
 
-subprocess.run(f"sudo cp {org_image} {new_image}", shell=True)
+if weekday in weekdays:
+    subprocess.run(f"sudo cp {org_image} {new_image}", shell=True)
+
+if jinja:
+    jinja2_template_string = open("template.jinja2", 'rb').read()
+    template = Template(jinja2_template_string)
+    html_template_string = template.render(title="",
+                                           timestamp=stamp)
+    with open("/home/pi/nas/index.html", "w") as result_file:
+        result_file.write(html_template_string)

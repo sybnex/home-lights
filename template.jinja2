@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="refresh" content="300">
+		<title>Niederwangen Webcam</title>
+		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+	</head>
+	<body>
+		<div class="columns">
+			<div class="column col-1"></div>
+			<div class="column col-10">
+				<div class="hero bg-gray text-center">
+					<h4>{{ title }}</h4>
+				</div>
+			</div>
+			<div class="column col-1"></div>
+		</div>
+		<div class="container">
+			<div class="columns">
+				<div class="column col-1"></div>
+				<div class="column col-10">
+					<div class="card">
+						<div class="card-image">
+							<img src="latest.jpg" class="img-responsive">
+						</div>
+						<div class="card-footer text-right">
+							Timestamp: {{ timestamp }} (c) by this page
+						</div>
+					</div>
+				</div>
+				<div class="column col-1"></div>
+			</div>
+		</div>
+	</body>
+</html>
