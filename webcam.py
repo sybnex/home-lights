@@ -78,8 +78,9 @@ if __name__ == "__main__":
 
         if jinja:
             stamp = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
-            jinja2_template_string = open(template_path, 'r').read()
-            template = Template(jinja2_template_string)
+            with open(template_path, "r") as template_file:
+                template = Template(template_file.read())
             html_template_string = template.render(timestamp=stamp)
             with open("/home/pi/nas/index.html", "w") as result_file:
                 result_file.write(html_template_string)
+
