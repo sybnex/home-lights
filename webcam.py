@@ -25,8 +25,7 @@ new_image = f"/home/pi/nas/{stamp}.jpg"
 now = datetime.datetime.now()
 weekday = now.isoweekday()
 weekdays = (1,2,3,4,5)
-script_path = os.path.abspath(".")
-template_path = f"{script_path}/template.jinja2"
+template_path = f"/home/pi/home-lights/template.jinja2"
 
 def check_path():
     if not os.path.exists(org_image):
@@ -81,6 +80,7 @@ if __name__ == "__main__":
             with open(template_path, "r") as template_file:
                 template = Template(template_file.read())
             html_template_string = template.render(timestamp=stamp)
+            print(html_template_string)
             with open("/home/pi/nas/index.html", "w") as result_file:
                 result_file.write(html_template_string)
 
